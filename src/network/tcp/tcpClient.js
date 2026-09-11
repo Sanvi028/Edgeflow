@@ -3,7 +3,7 @@ import net from 'node:net'
 const client = net.createConnection(5000,()=>{
     console.log("Connected to server")
 
-    client.write("Hello Server")
+    client.write("Hello Server\n")
 })
 
 client.on("data", (data) => {

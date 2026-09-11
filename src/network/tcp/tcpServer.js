@@ -3,6 +3,7 @@ import net from 'node:net';
 let clientId = 0;
 
 const server = net.createServer((socket) => {
+    let buffer = "";
 
     clientId++;
 
@@ -11,13 +12,18 @@ const server = net.createServer((socket) => {
     console.log(`Client ${currentClient} connected`);
 
     socket.on("data", (data) => {
+    buffer += data.toString();
 
-        const message = data.toString();
+    let messages = buffer.split("\n");
 
+    buffer = messages.pop();
+
+    for (const message of messages) {
         console.log(`Client ${currentClient}: ${message}`);
 
-        socket.write(`Hello Client ${currentClient}`);
-    });
+        socket.write(`Hello Client ${currentClient}\n`);
+    }
+}); 
 
     socket.on("end", () => {
         console.log(`Client ${currentClient} disconnected`);
