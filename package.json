@@ -1,0 +1,26 @@
+{
+  "name": "edgeflow",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+  "dev:tcp-server": "nodemon src/network/tcp/tcpServer.js",
+  "dev:tcp-client": "nodemon src/network/tcp/tcpClient.js",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sanvi028/Edgeflow.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sanvi028/Edgeflow/issues"
+  },
+  "homepage": "https://github.com/Sanvi028/Edgeflow#readme",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
