@@ -1,23 +1,29 @@
-import net from 'node:net'
+import net from 'node:net';
 
-const server  = net.createServer((socket)=>{
-    console.log("Client connected")
+let clientId = 0;
 
-    socket.on("data",(data)=>{
+const server = net.createServer((socket) => {
+
+    clientId++;
+
+    const currentClient = clientId;
+
+    console.log(`Client ${currentClient} connected`);
+
+    socket.on("data", (data) => {
+
         const message = data.toString();
 
-        console.log("Received:", message);
+        console.log(`Client ${currentClient}: ${message}`);
 
-        socket.write("Hello Client");
+        socket.write(`Hello Client ${currentClient}`);
+    });
 
-    })
-
-  socket.on("end", () => {
-        console.log("Client disconnected");
+    socket.on("end", () => {
+        console.log(`Client ${currentClient} disconnected`);
     });
 });
 
-server.listen(5000,()=>{
-    console.log("TCP server started at port 5000")
-})
-
+server.listen(5000, () => {
+    console.log("TCP server started at port 5000");
+});
