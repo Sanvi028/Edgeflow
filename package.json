@@ -7,6 +7,7 @@
   "dev:tcp-client": "nodemon src/network/tcp/tcpClient.js",
   "dev:udp-server": "nodemon src/network/udp/udpServer.js",
   "dev:udp-client": "nodemon src/network/udp/udpClient.js",
+  "dev:origin": "nodemon src/origin/originServer.js",
   "test": "echo \"Error: no test specified\" && exit 1"
 },
   "type": "module",

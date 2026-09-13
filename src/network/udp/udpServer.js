@@ -10,7 +10,15 @@ server.on('message', (message, rinfo) => {
 
     if (data.type === 'heartbeat') {
 
-        edges[data.edgeId] = Date.now();
+        if (!edges[data.edgeId]) {
+            edges[data.edgeId] = {
+                lastSeen: Date.now(),
+                status: 'healthy'
+            };
+        } else {
+            edges[data.edgeId].lastSeen = Date.now();
+            edges[data.edgeId].status = 'healthy';
+        }
 
         console.log(`Heartbeat received from ${data.edgeId}`);
     }
@@ -22,13 +30,15 @@ setInterval(() => {
 
     for (const edgeId in edges) {
 
-        const lastSeen = edges[edgeId];
+        const edge = edges[edgeId];
 
-        if (now - lastSeen > 5000) {
-            console.log(`${edgeId} is UNHEALTHY`);
+        if (now - edge.lastSeen > 5000) {
+            edge.status = 'unhealthy';
         } else {
-            console.log(`${edgeId} is HEALTHY`);
+            edge.status = 'healthy';
         }
+
+        console.log(`${edgeId}: ${edge.status}`);
     }
 
 }, 2000);
